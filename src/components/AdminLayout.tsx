@@ -1,17 +1,6 @@
 import { LayoutDashboard, Box, ShoppingCart, Settings, LogOut, Menu, Search, Bell, HelpCircle, ChevronDown } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
-  const location = useLocation()
-  const { signOut, user } = useAuth()
-
-  const navItems = [
-    { name: 'Dashboard', path: '#', icon: LayoutDashboard },
-    { name: 'Products', path: '/', icon: Box },
-    { name: 'Orders', path: '#', icon: ShoppingCart },
-  ]
-
   return (
     <div className="font-['Inter'] text-sm antialiased min-h-screen flex bg-[#0a0a0b] text-white selection:bg-[#e8ff47] selection:text-[#0a0a0b]">
       {/* SideNavBar */}
@@ -21,33 +10,25 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
           <p className="text-xs font-bold text-[#8b8b94] mt-2 tracking-widest uppercase">Premium Admin</p>
         </div>
         <div className="flex-1 flex flex-col gap-2">
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path || (item.path === '/' && location.pathname.startsWith('/products'))
-            return (
-              <Link 
-                key={item.name} 
-                to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
-                  isActive 
-                    ? 'text-[#e8ff47] font-bold bg-white/5 border-r-4 border-[#e8ff47]' 
-                    : 'text-[#8b8b94] hover:text-white hover:bg-white/5 font-medium'
-                }`}
-              >
-                <item.icon className="w-5 h-5" />
-                <span>{item.name}</span>
-              </Link>
-            )
-          })}
+          <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#8b8b94] hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+            <LayoutDashboard className="w-5 h-5" />
+            <span className="font-medium">Dashboard</span>
+          </a>
+          <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#e8ff47] font-bold bg-white/5 border-r-4 border-[#e8ff47] transition-all duration-200" href="#">
+            <Box className="w-5 h-5" />
+            <span>Products</span>
+          </a>
+          <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#8b8b94] hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+            <ShoppingCart className="w-5 h-5" />
+            <span className="font-medium">Orders</span>
+          </a>
         </div>
         <div className="mt-auto flex flex-col gap-2 border-t border-white/10 pt-6">
           <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#8b8b94] hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
             <Settings className="w-5 h-5" />
             <span className="font-medium">Settings</span>
           </a>
-          <button 
-            onClick={signOut}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors mt-4 text-left w-full font-bold"
-          >
+          <button className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors mt-4 text-left w-full font-bold">
             <LogOut className="w-5 h-5" />
             Log Out
           </button>
@@ -55,7 +36,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       </nav>
 
       {/* Main Content Wrapper */}
-      <div className="flex-1 md:ml-[280px] flex flex-col min-h-screen w-full">
+      <div className="flex-1 md:ml-[280px] flex flex-col min-h-screen">
         {/* TopNavBar */}
         <header className="flex justify-between items-center w-full h-20 px-6 bg-[#0a0a0b]/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-40">
           <div className="flex items-center gap-4">
@@ -83,22 +64,18 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             </div>
             <div className="h-8 w-px bg-white/10"></div>
             <button className="flex items-center gap-2 bg-[#111114] border border-white/10 p-1 pr-3 rounded-full hover:bg-white/5 transition-colors">
-              <div className="w-8 h-8 rounded-full bg-zinc-800 border border-white/10 overflow-hidden flex items-center justify-center text-xs font-bold text-white uppercase">
-                {user?.email?.substring(0, 2) || 'AD'}
+              <div className="w-8 h-8 rounded-full bg-zinc-800 border border-white/10 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop" alt="Admin" className="w-full h-full object-cover" />
               </div>
-              <span className="text-sm font-medium hidden lg:block truncate max-w-[120px]">
-                {user?.email || 'Admin'}
-              </span>
+              <span className="text-sm font-medium hidden lg:block">Admin</span>
               <ChevronDown className="text-[#8b8b94] w-4 h-4" />
             </button>
           </div>
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-6 md:p-10 w-full overflow-x-auto">
-          <div className="max-w-[1440px] mx-auto">
-            {children}
-          </div>
+        <main className="flex-1 p-6 md:p-10 w-full max-w-[1440px] mx-auto overflow-x-hidden">
+          {children}
         </main>
       </div>
     </div>

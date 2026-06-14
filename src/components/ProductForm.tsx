@@ -1,4 +1,4 @@
-import { CloudUpload, Image as ImageIcon, Plus, Save } from 'lucide-react'
+import { CloudUpload, Save } from 'lucide-react'
 import { AdminLayout } from '../components/AdminLayout'
 
 export function ProductFormPage() {

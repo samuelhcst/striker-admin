@@ -1,4 +1,4 @@
-import { Search, Plus, Filter, ArrowUpDown, Edit, Trash2 } from 'lucide-react'
+import { Search, Plus, Edit, Trash2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AdminLayout } from '../components/AdminLayout'

@@ -50,7 +50,7 @@ export function LoginPage() {
             <div>
               <h1 className="font-['DM_Sans'] text-5xl font-bold tracking-tighter text-[#d8ee36] mb-2">STRIKER</h1>
               <h2 className="font-['DM_Sans'] text-2xl font-semibold text-white">Admin Login</h2>
-              <p className="font-['Inter'] text-sm text-slate-400 mt-2">Enter your credentials to access the secure dashboard.</p>
+              <p className="font-['Inter'] text-sm text-slate-400 mt-2">Ingresa tus credenciales para acceder al administrador.</p>
             </div>
             
             {/* Form */}
@@ -62,7 +62,7 @@ export function LoginPage() {
               )}
 
               <div className="flex flex-col gap-2">
-                <label className="font-['Inter'] text-xs font-bold text-slate-400 uppercase tracking-widest" htmlFor="email">Email Address</label>
+                <label className="font-['Inter'] text-xs font-bold text-slate-400 uppercase tracking-widest" htmlFor="email">Email</label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5 pointer-events-none" />
                   <input 
@@ -79,8 +79,8 @@ export function LoginPage() {
 
               <div className="flex flex-col gap-2">
                 <label className="font-['Inter'] text-xs font-bold text-slate-400 uppercase tracking-widest flex justify-between items-center" htmlFor="password">
-                  Password
-                  <a className="text-slate-400 hover:text-[#d8ee36] transition-colors font-['Inter'] text-sm font-normal lowercase" href="#">Forgot?</a>
+                  Contraseña
+
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5 pointer-events-none" />
@@ -104,7 +104,7 @@ export function LoginPage() {
                   className="w-4 h-4 rounded border-white/10 bg-[#0f172a] text-[#d8ee36] focus:ring-[#d8ee36] focus:ring-offset-[#020617] accent-[#d8ee36]"
                 />
                 <label className="font-['Inter'] text-sm text-slate-400 cursor-pointer hover:text-white transition-colors" htmlFor="remember">
-                  Remember me on this device
+                  Recordarme
                 </label>
               </div>
 
@@ -119,7 +119,7 @@ export function LoginPage() {
 
               <div className="mt-4 text-center">
                 <p className="font-['Inter'] text-sm text-slate-400">
-                  Restricted access. Internal use only.
+                  Acceso restringido. Solo para uso interno.
                 </p>
               </div>
             </form>

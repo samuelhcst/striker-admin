@@ -1,6 +1,8 @@
 import { LayoutDashboard, Box, ShoppingCart, Settings, LogOut, Menu, Search, Bell, HelpCircle, ChevronDown } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
+  const { signOut } = useAuth()
   return (
     <div className="font-['Inter'] text-sm antialiased min-h-screen flex bg-[#0a0a0b] text-white selection:bg-[#e8ff47] selection:text-[#0a0a0b]">
       {/* SideNavBar */}
@@ -16,21 +18,24 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
           </a>
           <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#e8ff47] font-bold bg-white/5 border-r-4 border-[#e8ff47] transition-all duration-200" href="#">
             <Box className="w-5 h-5" />
-            <span>Products</span>
+            <span>Productos</span>
           </a>
           <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#8b8b94] hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
             <ShoppingCart className="w-5 h-5" />
-            <span className="font-medium">Orders</span>
+            <span className="font-medium">Pedidos</span>
           </a>
         </div>
         <div className="mt-auto flex flex-col gap-2 border-t border-white/10 pt-6">
           <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#8b8b94] hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
             <Settings className="w-5 h-5" />
-            <span className="font-medium">Settings</span>
+            <span className="font-medium">Configuración</span>
           </a>
-          <button className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors mt-4 text-left w-full font-bold">
+          <button 
+            onClick={() => signOut()}
+            className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors mt-4 text-left w-full font-bold"
+          >
             <LogOut className="w-5 h-5" />
-            Log Out
+            Salir
           </button>
         </div>
       </nav>

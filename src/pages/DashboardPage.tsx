@@ -27,6 +27,7 @@ export function DashboardPage() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProducts()
   }, [])
 
@@ -46,7 +47,7 @@ export function DashboardPage() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
         <div>
           <h2 className="font-['DM_Sans'] text-2xl md:text-3xl font-bold text-white mb-2">Catálogo de Productos</h2>
-          <p className="text-[#8b8b94]">Manage your premium sneaker inventory.</p>
+          <p className="text-[#8b8b94]">Admintra tu inventario de sneakers.</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative w-full sm:w-72 md:hidden">
@@ -114,7 +115,7 @@ export function DashboardPage() {
                     <td className="p-4">
                       <div className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-bold ${product.stock > 5 ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-red-500/10 border-red-500/20 text-red-400'}`}>
                         <div className={`w-1.5 h-1.5 rounded-full ${product.stock > 5 ? 'bg-emerald-400' : 'bg-red-400'}`}></div>
-                        {product.stock} in stock
+                        {product.stock} en stock
                       </div>
                     </td>
                     <td className="p-4 text-right">

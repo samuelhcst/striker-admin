@@ -94,7 +94,7 @@ export function ProductFormPage() {
       image_url: formData.image_url
     }
 
-    let submitError = null
+    let submitError: Error | null;
 
     if (isEditing) {
       const { error } = await supabase.from('products').update(payload).eq('id', id)

@@ -24,6 +24,22 @@ export function LoginPage() {
       setError(error.message)
       setLoading(false)
     } else {
+      // Verificar rol inmediatamente antes de redirigir
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.user) {
+        const { data: perfil } = await supabase
+          .from('perfiles')
+          .select('rol')
+          .eq('id', session.user.id)
+          .single()
+
+        if (perfil?.rol !== 'admin') {
+          setError('Acceso denegado: No tienes permisos de administrador.')
+          await supabase.auth.signOut()
+          setLoading(false)
+          return
+        }
+      }
       navigate('/')
     }
   }

@@ -21,19 +21,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
+  const checkAdminAndSetSession = async (currentSession: Session | null) => {
+    if (currentSession?.user) {
+      const { data: perfil } = await supabase
+        .from('perfiles')
+        .select('rol')
+        .eq('id', currentSession.user.id)
+        .single()
+
+      if (perfil?.rol !== 'admin') {
+        await supabase.auth.signOut()
+        alert('Acceso denegado: No tienes permisos de administrador.')
+        setSession(null)
+        setUser(null)
+        setIsLoading(false)
+        return
+      }
+    }
+    setSession(currentSession)
+    setUser(currentSession?.user ?? null)
+    setIsLoading(false)
+  }
+
   useEffect(() => {
     // Obtener sesión actual
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-      setIsLoading(false)
+      checkAdminAndSetSession(session)
     })
 
     // Escuchar cambios (login, logout)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-      setIsLoading(false)
+      checkAdminAndSetSession(session)
     })
 
     return () => subscription.unsubscribe()

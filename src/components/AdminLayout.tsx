@@ -2,7 +2,11 @@ import { LayoutDashboard, Box, ShoppingCart, Settings, LogOut, Menu, Search, Bel
 import { useAuth } from '../contexts/AuthContext'
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
+  
+  // Get first letter of email, fallback to 'A' if no user
+  const initial = user?.email ? user.email.charAt(0).toUpperCase() : 'A'
+  
   return (
     <div className="font-['Inter'] text-sm antialiased min-h-screen flex bg-[#0a0a0b] text-white selection:bg-[#e8ff47] selection:text-[#0a0a0b]">
       {/* SideNavBar */}
@@ -69,11 +73,13 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             </div>
             <div className="h-8 w-px bg-white/10"></div>
             <button className="flex items-center gap-2 bg-[#111114] border border-white/10 p-1 pr-3 rounded-full hover:bg-white/5 transition-colors">
-              <div className="w-8 h-8 rounded-full bg-zinc-800 border border-white/10 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop" alt="Admin" className="w-full h-full object-cover" />
+              <div className="w-8 h-8 rounded-full bg-[#e8ff47] text-[#0a0a0b] flex items-center justify-center font-bold text-sm">
+                {initial}
               </div>
-              <span className="text-sm font-medium hidden lg:block">Admin</span>
-              <ChevronDown className="text-[#8b8b94] w-4 h-4" />
+              <span className="text-sm font-medium hidden lg:block truncate max-w-[120px]">
+                {user?.email || 'Admin'}
+              </span>
+              <ChevronDown className="text-[#8b8b94] w-4 h-4 ml-1" />
             </button>
           </div>
         </header>
